@@ -3,6 +3,7 @@ import tempfile
 
 import pytest
 from tests.helpers.kubernetes.cluster import Cluster
+from tests.helpers.metadata import Metadata
 from tests.helpers.util import get_docker_client, run_container
 
 MINIKUBE_DEFAULT_TIMEOUT = int(os.environ.get("MINIKUBE_TIMEOUT", 300))
@@ -112,3 +113,11 @@ def devstack():
         code, output = container.exec_run("start-devstack.sh")
         assert code == 0, "devstack failed to start:\n%s" % output.decode("utf-8")
         yield container
+
+
+@pytest.fixture
+def metadata():
+    def _metadata(pkg):
+        return Metadata.from_package(pkg)
+
+    return _metadata
