@@ -68,6 +68,8 @@ func (m *Monitor) Shutdown() {
 // SignalFx PCR
 func NewPCRReplacer() *strings.Replacer {
 	return strings.NewReplacer(
+		"%", "pct", // PCR bad char
+		"(s)", "_", // PCR bad string
 		" ", "_", // PCR bad char
 		";", "_", // PCR bad char
 		":", "_", // PCR bad char
@@ -91,7 +93,7 @@ func NewPCRReplacer() *strings.Replacer {
 func NewPCRMetricNamesTransformer() func(string) string {
 	replacer := NewPCRReplacer()
 	return func(in string) string {
-		return replacer.Replace(strings.ToLower(in))
+		return strings.Trim(replacer.Replace(strings.ToLower(in)), "_")
 	}
 }
 

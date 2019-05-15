@@ -90,6 +90,8 @@ func (m *Monitor) Configure(conf *Config) error {
 	// replacer sanitizes metrics according to our PCR reporter rules
 	replacer := winperfcounters.NewPCRReplacer()
 
+	emit.AddMetricNameTransformation(winperfcounters.NewPCRMetricNamesTransformer())
+
 	emit.AddMeasurementTransformation(
 		func(ms telegraf.Metric) error {
 			// if it's a sqlserver_performance metric
