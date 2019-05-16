@@ -68,6 +68,7 @@ import (
 	_ "github.com/signalfx/signalfx-agent/internal/monitors/windowslegacy"
 	_ "github.com/signalfx/signalfx-agent/internal/observers/docker"
 	_ "github.com/signalfx/signalfx-agent/internal/observers/ecs"
+	_ "github.com/signalfx/signalfx-agent/internal/observers/ecsapi"
 	_ "github.com/signalfx/signalfx-agent/internal/observers/file"
 	_ "github.com/signalfx/signalfx-agent/internal/observers/host"
 	_ "github.com/signalfx/signalfx-agent/internal/observers/kubelet"
